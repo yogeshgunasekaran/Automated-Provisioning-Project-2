@@ -2,10 +2,10 @@
 
 # Modify Kernel System Limits
 # Take a backup of the default sysctl configuration file
-cp /etc/sysctl.conf /root/sysctl.conf_backup
+sudo cp /etc/sysctl.conf /root/sysctl.conf_backup
 
 # Set the system defaults
-cat <<EOT> /etc/sysctl.conf
+sudo cat <<EOT> /etc/sysctl.conf
 vm.max_map_count=262144
 fs.file-max=65536
 ulimit -n 65536
@@ -13,10 +13,10 @@ ulimit -u 4096
 EOT
 
 # Take a backup of the default sysctl configuration file
-cp /etc/security/limits.conf /root/sec_limit.conf_backup
+sudo cp /etc/security/limits.conf /root/sec_limit.conf_backup
 
 # Set resource limits for sonarqube' database
-cat <<EOT> /etc/security/limits.conf
+sudo cat <<EOT> /etc/security/limits.conf
 sonarqube   -   nofile   65536
 sonarqube   -   nproc    409
 EOT
@@ -89,10 +89,10 @@ sudo useradd -c "SonarQube - User" -d /opt/sonarqube/ -g sonar sonar
 sudo chown sonar:sonar /opt/sonarqube/ -R
 
 # Copy the default SonarQube Configuration file to '/root' (root home directory) as a backup
-cp /opt/sonarqube/conf/sonar.properties /root/sonar.properties_backup
+sudo cp /opt/sonarqube/conf/sonar.properties /root/sonar.properties_backup
 
 # Now update the SonarQube configuration with the following lines
-cat <<EOT>> /opt/sonarqube/conf/sonar.properties
+sudo cat <<EOT>> /opt/sonarqube/conf/sonar.properties
 sonar.jdbc.username=sonar
 sonar.jdbc.password=admin123
 sonar.jdbc.url=jdbc:postgresql://localhost/sonarqube
@@ -105,7 +105,7 @@ sonar.path.logs=logs
 EOT
 
 # Setup Systemd service for SonarQube service
-cat <<EOT>> /etc/systemd/system/sonarqube.service
+sudo cat <<EOT>> /etc/systemd/system/sonarqube.service
 [Unit]
 Description=SonarQube service
 After=syslog.target network.target
@@ -123,21 +123,21 @@ WantedBy=multi-user.target
 EOT
 
 # Enable the SonarQube service to run at system startup
-systemctl daemon-reload
-systemctl enable sonarqube.service
+sudo systemctl daemon-reload
+sudo systemctl enable sonarqube.service
 
 # Install Ngnix server
 # Ngnix server is installed to act as a reverse proxy server to sonarqube 
 # Ngnix service listen on port 80 and route the requests to sonarqube in localhost on port 9000
 # This allows in the integration of nexus to sonarqube through port 80
-apt-get install nginx -y
+sudo apt-get install nginx -y
 
 # Remove the default Nginx config files
-rm -rf /etc/nginx/sites-enabled/default
-rm -rf /etc/nginx/sites-available/default
+sudo rm -rf /etc/nginx/sites-enabled/default
+sudo rm -rf /etc/nginx/sites-available/default
 
 # Configure ngnix to listen on port 80 and route the request to sonarqube on port 9000 locally by adding the following lines
-cat <<EOT>> /etc/nginx/sites-available/sonarqube
+sudo cat <<EOT>> /etc/nginx/sites-available/sonarqube
 server{
     listen      80;
     server_name sonarqube.groophy.in;
@@ -159,10 +159,10 @@ server{
 EOT
 
 # Create Symbolic link to activate the ngnix proxy server
-ln -s /etc/nginx/sites-available/sonarqube /etc/nginx/sites-enabled/sonarqube
+sudo ln -s /etc/nginx/sites-available/sonarqube /etc/nginx/sites-enabled/sonarqube
 
 # Enable ngnix to start at runtime
-systemctl enable nginx.service
+sudo systemctl enable nginx.service
 
 # Allow the following ports in Ubuntu firewall and reboot system
 sudo ufw allow 80,9000,9001/tcp
