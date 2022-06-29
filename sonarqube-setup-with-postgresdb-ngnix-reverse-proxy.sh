@@ -126,8 +126,8 @@ EOT
 sudo systemctl daemon-reload
 sudo systemctl enable sonarqube.service
 
-# Install Ngnix server
-# Ngnix server is installed to act as a reverse proxy server to sonarqube 
+# Install Ngnix 
+# Ngnix is installed to act as a reverse proxy server to sonarqube 
 # Ngnix service listen on port 80 and route the requests to sonarqube in localhost on port 9000
 # This allows in the integration of nexus to sonarqube through port 80
 sudo apt-get install nginx -y
