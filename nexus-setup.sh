@@ -1,7 +1,6 @@
 #!/bin/bash
 
 # Install Java
-sudo yum update -y
 sudo yum install java-1.8.0-openjdk.x86_64 wget -y   
 
 # Create a directory 'nexus' in '/tmp' and '/opt'
@@ -55,7 +54,7 @@ WantedBy=multi-user.target
 EOT
 
 # Add the following line in nexus.rc
-sudo echo 'run_as_user="nexus"' >> /opt/nexus/$NEXUSDIR/bin/nexus.rc
+sudo echo 'run_as_user="nexus"' > /opt/nexus/$NEXUSDIR/bin/nexus.rc
 
 # Reload systemctl, start and enable the 'nexus' service
 sudo systemctl daemon-reload
