@@ -39,16 +39,14 @@ sudo chown -R nexus.nexus /opt/nexus
 sudo cat <<EOT>> /etc/systemd/system/nexus.service
 [Unit]                                                                          
 Description=nexus service                                                       
-After=network.target                                                            
-                                                                  
+After=network.target                                                                                                                          
 [Service]                                                                       
 Type=forking                                                                    
 LimitNOFILE=65536                                                               
 ExecStart=/opt/nexus/$NEXUSDIR/bin/nexus start                                  
 ExecStop=/opt/nexus/$NEXUSDIR/bin/nexus stop                                    
 User=nexus                                                                      
-Restart=on-abort                                                                
-                                                                  
+Restart=on-abort                                                                                                                                
 [Install]                                                                       
 WantedBy=multi-user.target                                                      
 
