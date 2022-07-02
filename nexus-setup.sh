@@ -3,8 +3,8 @@
 # Refresh server’s local package index
 sudo yum update -y
 
-# Install java, wget, rsync, rsync
-sudo yum install java-1.8.0-openjdk.x86_64 wget -y   
+# Install java, wget, rsync 
+sudo yum install java-1.8.0-openjdk.x86_64 wget rsync -y   
 
 # Create a directory 'nexus' in '/tmp' and '/opt'
 sudo mkdir -p /opt/nexus/   
