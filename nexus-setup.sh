@@ -57,7 +57,7 @@ WantedBy=multi-user.target
 EOT
 
 # Add the following line in nexus.rc
-sudo echo 'run_as_user="nexus"' >> /opt/nexus/$NEXUSDIR/bin/nexus.rc
+sudo echo 'run_as_user="nexus"' > /opt/nexus/$NEXUSDIR/bin/nexus.rc
 
 # Reload systemctl, start and enable the 'nexus' service
 sudo systemctl daemon-reload
