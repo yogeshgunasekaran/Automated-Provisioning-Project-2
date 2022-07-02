@@ -7,7 +7,7 @@ This Project is to Automate Provisioning of Jenkins, Nexus &amp; SonarQube
 +   Security Group,
     * Allow **port 22**, source: **My IP** - to ssh into jenkins server from My IP
     * Allow **port 8080**, source: **My IP** - to access jenkins on web from My IP
-    * Allow **port 80**, source: **SonarQube-Server-IP** - for sonarqube to connect with jenkins for quality check
+    * Allow **port 8080**, source: **SonarQube-Server-Private-IP** - for sonarqube to connect with jenkins for quality check
 
 
 ### 2. Nexus Server 
@@ -15,7 +15,7 @@ This Project is to Automate Provisioning of Jenkins, Nexus &amp; SonarQube
 +   Instance type - t2 medium - 2 vCPU - 4 GB Memory
 +   Security Group,
     * Allow **port 22**, source: **My IP** - to ssh into nexus server from My IP
-    * Allow **port 8081**, source: **Jenkins-Security-Group-only** - to access nexus on web from My IP and also for jenkins to access it on command line
+    * Allow **port 8081**, source: **Jenkins-Security-Group** - to access nexus on web from My IP and also for jenkins to access it on command line
 
 
 ### 3. SonarQube Server  
