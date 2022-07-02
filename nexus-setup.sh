@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Refresh server’s local package index
+sudo yum update -y
+
 # Install java, wget, rsync 
 sudo yum install java-1.8.0-openjdk.x86_64 wget rsync -y   
 
@@ -8,7 +11,7 @@ sudo mkdir -p /opt/nexus/
 sudo mkdir -p /tmp/nexus/   
 
 # Cd into '/tmp/nexus' directory                       
-sudo cd /tmp/nexus/
+cd /tmp/nexus/
 
 # Assign the latest URL of the Nexus Repository Manager from the official website to a variable
 NEXUSURL="https://download.sonatype.com/nexus/3/latest-unix.tar.gz"
