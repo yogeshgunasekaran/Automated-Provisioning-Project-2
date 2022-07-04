@@ -1,6 +1,7 @@
 # Automated-Provisioning-Project-2
 This Project is to Automate Provisioning of Jenkins, Nexus &amp; SonarQube
 ## Prerequisite - 3 AWS EC2 Instances
+#### <ins> *Note* </ins>  :  Create all the three servers in same availabilty zone under a VPC, resulting in creating a network so that the private IP can used for the system communication.
 ### 1. Jenkins Server 
 +   AMI - Ubuntu 20.04 LTS
 +   Instance type - t2 small - 1 vCPU - 2 GB Memory
