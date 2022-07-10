@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install java, wget, rsync 
-yum install java-1.8.0-openjdk.x86_64 wget rsync -y   
+yum install java-1.8.0-openjdk.x86_64 wget -y   
 
 # Create a directory 'nexus' in '/tmp' and '/opt'
 mkdir -p /opt/nexus/   
