@@ -1,14 +1,11 @@
 #!/bin/bash
 
-# Refresh server’s local package index
-sudo yum update -y
-
 # Install java, wget, rsync 
-sudo yum install java-1.8.0-openjdk.x86_64 wget rsync -y   
+yum install java-1.8.0-openjdk.x86_64 wget rsync -y   
 
 # Create a directory 'nexus' in '/tmp' and '/opt'
-sudo mkdir -p /opt/nexus/   
-sudo mkdir -p /tmp/nexus/   
+mkdir -p /opt/nexus/   
+mkdir -p /tmp/nexus/   
 
 # Cd into '/tmp/nexus' directory                       
 cd /tmp/nexus/
@@ -17,7 +14,7 @@ cd /tmp/nexus/
 NEXUSURL="https://download.sonatype.com/nexus/3/latest-unix.tar.gz"
 
 # Download it using wget as 'nexus.tar.gz'
-sudo wget $NEXUSURL -O nexus.tar.gz
+wget $NEXUSURL -O nexus.tar.gz
 
 # Extract the downloaded tarball with a variable
 EXTOUT=`tar xzvf nexus.tar.gz`
@@ -26,19 +23,19 @@ EXTOUT=`tar xzvf nexus.tar.gz`
 NEXUSDIR=`echo $EXTOUT | cut -d '/' -f1`
 
 # Remove the tarball as it is not needed anymore
-sudo rm -rf /tmp/nexus/nexus.tar.gz
+rm -rf /tmp/nexus/nexus.tar.gz
 
 # Sync all the files in '/tmp/nexus/' to '/opt/nexus/'
-sudo rsync -avzh /tmp/nexus/ /opt/nexus/
+rsync -avzh /tmp/nexus/ /opt/nexus/
 
 # Add a system user 'nexus'
-sudo useradd nexus
+useradd nexus
 
 # Set user and group ownership to the '/opt/nexus' directory with user 'nexus'
-sudo chown -R nexus.nexus /opt/nexus 
+chown -R nexus.nexus /opt/nexus 
 
 # Create a systemd service file in '/etc/systemd/system/nexus.service' to use systemctl commands
-sudo cat <<EOT>> /etc/systemd/system/nexus.service
+cat <<EOT>> /etc/systemd/system/nexus.service
 [Unit]                                                                          
 Description=nexus service                                                       
 After=network.target                                                            
@@ -57,9 +54,9 @@ WantedBy=multi-user.target
 EOT
 
 # Add the following line in nexus.rc
-sudo echo 'run_as_user="nexus"' > /opt/nexus/$NEXUSDIR/bin/nexus.rc
+echo 'run_as_user="nexus"' > /opt/nexus/$NEXUSDIR/bin/nexus.rc
 
 # Reload systemctl, start and enable the 'nexus' service
-sudo systemctl daemon-reload
-sudo systemctl start nexus
-sudo systemctl enable nexus
+systemctl daemon-reload
+systemctl start nexus
+systemctl enable nexus
