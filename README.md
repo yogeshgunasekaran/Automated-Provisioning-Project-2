@@ -25,4 +25,6 @@ This Project is to Automate Provisioning of Jenkins, Nexus &amp; SonarQube
 +   Security Group,
     * Allow **port 22**, source: **My IP** - to ssh into sonarqube server from My IP
     * Allow **port 9000**, source: **My IP** - to access sonarqube on web from My IP
+    * Allow **port 9000**, source: **Jenkins-Security-Group** - for jenkins to access sonarqube 
     * Allow **port 80**, source: **My IP** - to access sonarqube on web from My IP (this is through ngnix reverse proxy)
+    * Allow **port 80**, source: **Jenkins-Security-Group** - for jenkins to access sonarqube
