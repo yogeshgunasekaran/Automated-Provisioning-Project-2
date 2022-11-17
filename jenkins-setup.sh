@@ -1,7 +1,7 @@
 #!/bin/bash
 # Install Java
 sudo apt update
-sudo apt install openjdk-8-jdk -y
+sudo apt install openjdk-11-jdk -y
 
 # Install the ca-certificates package, a tool which allows SSL-based applications to check for the authenticity of SSL connections
 sudo apt install ca-certificates -y
